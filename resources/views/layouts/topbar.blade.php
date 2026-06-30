@@ -11,27 +11,64 @@
             placeholder="Search..."
             class="border rounded-lg px-4 py-2 w-72">
 
-        <div class="flex items-center gap-3">
+        <div class="relative" x-data="{ open: false }">
 
-            <div class="w-10 h-10 rounded-full bg-blue-600 text-white flex items-center justify-center">
+            <button
+                @click="open = !open"
+                class="flex items-center gap-3 focus:outline-none">
 
-                {{ strtoupper(substr(Auth::user()->name,0,1)) }}
+                <div class="w-10 h-10 rounded-full bg-blue-600 text-white flex items-center justify-center">
 
-            </div>
+                    {{ strtoupper(substr(Auth::user()->name,0,1)) }}
 
-            <div>
+                </div>
 
-                <p class="font-semibold">
+                <div class="text-left">
 
-                    {{ Auth::user()->name }}
+                    <p class="font-semibold">
+                        {{ Auth::user()->name }}
+                    </p>
 
-                </p>
+                    <small class="text-gray-500">
+                        Administrator
+                    </small>
 
-                <small class="text-gray-500">
+                </div>
 
-                    Administrator
+                <svg
+                    class="w-4 h-4 text-gray-600"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    viewBox="0 0 24 24">
 
-                </small>
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M19 9l-7 7-7-7"/>
+
+                </svg>
+
+            </button>
+
+            <div
+                x-show="open"
+                @click.outside="open = false"
+                x-transition
+                class="absolute right-0 mt-2 w-44 bg-white border rounded-lg shadow-lg overflow-hidden z-50">
+
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+
+                    <button
+                        type="submit"
+                        class="w-full text-left px-4 py-3 hover:bg-red-50 text-red-600 font-medium">
+
+                        Logout
+
+                    </button>
+
+                </form>
 
             </div>
 
