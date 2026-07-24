@@ -3,7 +3,6 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StudentController;
-use App\Http\Controllers\StudentIdCardController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\EnrollmentController;
 use App\Http\Controllers\DashboardController;
@@ -42,10 +41,6 @@ Route::get('/students/{student}/profile',
 )->name('students.profile')
 ->middleware('auth');
 
-Route::get(
-    '/students/{student}/id-card',
-    [StudentIdCardController::class,'generate']
-)->name('students.idcard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
