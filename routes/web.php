@@ -27,7 +27,7 @@ Route::get(
     [StudentController::class,'portal']
 )->name('students.portal');
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('dashboard');
 });
 
 Route::resource('enrollments', EnrollmentController::class);
